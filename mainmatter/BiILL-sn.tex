@@ -1,0 +1,261 @@
+
+% If the calculus has an acronym, define it.
+% (e.g. \newcommand{\LK}{\ensuremath{\mathbf{LK}}\xspace})
+
+\calculusName{Bi-Intuitionistic Linear Logic - shallow nested sequent calculus}   % The name of the calculus
+\calculusAcronym{BiILL$_{sn}$}    % The acronym if defined above, or empty otherwise. 
+\calculusLogic{Bi-Intuitionistic Linear Logic}  % Specify the logic (e.g. classical, intuitionistic, ...) for which this calculus is intended.
+\calculusType{nested sequent calculus}   % Specify the calculus type (e.g. Frege-Hilbert style, tableau, sequent calculus, hypersequent calculus, natural deduction, ...)
+\calculusYear{2013}   % The year when the calculus was invented.
+\calculusAuthor{Alwen Tiu} % The name(s) of the author(s) of the calculus.
+
+
+\entryTitle{BiILL-sn}     % Title of the entry (usually coincides with the name of the calculus).
+\entryAuthor{Jeremy Dawson \and Rajeev Gor\'e}    % Your name(s). Separate multiple names with "\and".
+
+
+% If you wish, use tags to give any other information 
+% that might be helpful for classifying and grouping this entry:
+% e.g. \tag{Two-Sided Sequents}
+% e.g. \tag{Multiset Cedents}
+% e.g. \tag{List Cedents}
+% You are free to invent your own tags. 
+% The Encyclopedia's coordinator will take care of 
+% merging semantically similar tags in the future.
+
+
+\maketitle
+
+
+% If your files are called "MyProofSystem.tex" and "MyProofSystem.bib", 
+% then you should write "\begin{entry}{MyProofSystem}" in the line below
+\begin{entry}{BiILL-sn}  
+
+% Define here any newcommands you may need:
+% e.g. \newcommand{\necessarily}{\Box}
+% e.g. \newcommand{\possibly}{\Diamond}
+
+
+\begin{calculus}
+
+% Add the inference rules of your proof system here.
+% The "proof.sty" and "bussproofs.sty" packages are available.
+% If you need any other package, please contact the editor (bruno@logic.at)
+
+
+% \begin{figure}[t]
+{\small
+Cut and identity: 
+$
+\qquad
+\vcenter{
+\infer[id]
+{p \seq p}{}
+}
+\qquad
+\vcenter{
+\infer[cut]
+{\Sc,\Vc \seq \Uc, \Tc}
+{\Sc \seq \Uc, A & A, \Vc \seq \Tc}
+}
+$
+
+Structural rules:
+$$
+\begin{array}{ccc}
+\mbox{$
+\infer[\drp_1]
+{(\Sc \seq \Tc) \seq \Tc'}
+{\Sc \seq \Tc, \Tc'}
+$}
+&
+\mbox{$
+\infer[\rp_1]
+{\Sc \seq (\Tc \seq \Tc')}
+{
+\Sc, \Tc \seq \Tc'
+}
+$}
+& 
+\mbox{$\infer[gl]
+{(\Sc, \Tc \seq \Sc') \seq \Tc'}
+{(\Sc \seq \Sc'), \Tc \seq \Tc'}
+$} \\ \\
+\mbox{$
+\infer[drp_2]
+{\Sc \seq \Tc, \Tc'}
+{(\Sc \seq \Tc) \seq \Tc'}
+$}
+& 
+\mbox{$
+\infer[rp_2]
+{\Sc, \Tc \seq \Tc'}
+{\Sc \seq (\Tc \seq \Tc')}
+$}
+& 
+\mbox{$
+\infer[gr]
+{\Sc \seq (\Sc' \seq \Tc', \Tc)}
+{
+ \Sc \seq (\Sc' \seq \Tc'), \Tc
+}
+$}
+\end{array}
+$$
+
+
+Logical rules:
+$$
+\infer[\punit_l]
+{\punit \seq \sunit}
+{}
+\qquad
+\infer[\punit_r]
+{\Sc \seq \Tc, \punit}
+{\Sc \seq \Tc}
+\qquad
+\infer[\tunit_l]
+{\Sc, \tunit \seq \Tc}
+{\Sc \seq \Tc}
+\qquad
+\infer[\tunit_r]
+{\sunit \seq \tunit}{}
+$$
+$$
+\infer[\ltens_l]
+{\Sc, A \ltens B \seq \Tc}
+{\Sc, A, B \seq \Tc}
+\qquad 
+\infer[\ltens_r]
+{\Sc, \Sc' \seq A \ltens B, \Tc, \Tc'}
+{\Sc \seq A, \Tc & \Sc' \seq B, \Tc'}
+$$
+$$
+\infer[\parr_l]
+{\Sc, \Sc', A \parr B \seq \Tc, \Tc'}
+{\Sc, A \seq \Tc & \Sc', B \seq \Tc'}
+\qquad
+\infer[\parr_r]
+{\Sc \seq A \parr B, \Tc}
+{\Sc \seq A, B, \Tc}
+$$
+$$
+\infer[\limp_l]
+{\Sc, \Sc', A \limp B \seq \Tc, \Tc'}
+{
+\Sc \seq A, \Tc
+&
+\Sc', B \seq \Tc'
+}
+\qquad
+\infer[\limp_r]
+{\Sc \seq \Tc, A \limp B}
+{\Sc \seq \Tc, (A \seq B)}
+$$
+$$
+\infer[\excl_l]
+{\Sc, A \excl B \seq \Tc}
+{
+ \Sc, (A \seq B) \seq \Tc
+}
+\qquad
+\infer[\excl_r]
+{\Sc, \Sc' \seq A \excl B, \Tc, \Tc'}
+{
+ \Sc \seq A, \Tc & 
+ \Sc', B \seq \Tc'
+}
+$$
+}
+% \caption{The shallow inference system $\biillsn$.}
+% \label{fig:fbills}
+% \end{figure}
+
+
+\end{calculus}
+
+% The following sections ("clarifications", "history", 
+% "technicalities") are optional. If you use them, 
+% be very concise and objective. Nevertheless, do write full sentences. 
+% Try to have at most one paragraph per section, because line breaks 
+% do not look nice in a short entry.
+
+\begin{clarifications}
+In \cite{Clouston13CSL}, nested sequents are defined as below
+where $A_i$ and $B_j$ are formulae:
+$$
+S~~T ::= S_1,\dots,S_k,A_1,\dots,A_m \seq B_1,\dots, B_n, T_1, \dots,T_l
+$$
+We use $\Gamma$ and $\Delta$ for multisets of formulae and use
+$P$, $Q$, $S$, $T$, $X$, $Y$, etc., for nested
+sequents, and $\Sc$, $\Xc$, etc., for
+multisets of nested sequents and formulae.
+\end{clarifications}
+
+\begin{history}
+% ToDo: write here short historical remarks about this proof system,
+% especially if they relate to other proof systems. 
+% Use "\iref{OtherProofSystem}" to refer to another proof system 
+% in the Encyclopedia (where "OtherProofSystem" is its ID). 
+% Use "\irefmissing{SuggestedIDForOtherProofSystem}" to refer to 
+% another proof system that is not yet available in the encyclopedia.
+\end{history}
+
+\begin{technicalities}
+% ToDo: write here remarks about soundness, completeness, decidability...
+\end{technicalities}
+
+
+% General Instructions:
+% =====================
+
+% The preferred length of an entry is 1 page. 
+% Do the best you can to fit your proof system in one page.
+%
+% If you are finding it hard to fit what you want in one page, remember:
+%
+%   * Your entry needs to be neither self-contained nor fully understandable
+%     (the interested reader may consult the cited full paper for details)
+%
+%   * If you are describing several proof systems in one entry, 
+%     consider splitting your entry.
+%
+%   * You may reduce the size of your entry by ommitting inference rules
+%     that are already described in other entries.
+%
+%   * Cite parsimoniously (see detailed citation instructions below).
+%
+% 
+% If you do not manage to fit everything in one page, 
+% it is acceptable for an entry to have 2 pages.
+%
+% For aesthetical reasons, it is preferable for an entry to have
+% 1 full page or 2 full pages, in order to avoid unused blank space.
+
+
+
+% Citation Instructions:
+% ======================
+
+% Please cite the original paper where the proof system was defined.
+% To do so, you may use the \cite command within 
+% one of the optional environments above,
+% or use the \nocite command otherwise.
+
+% You may also cite a modern paper or book where the 
+% proof system is explained in greater depth or clarity.
+% Cite parsimoniously.
+
+% Do not cite related work. Instead, use the "\iref" or "\irefmissing" 
+% commands to make an internal reference to another entry, 
+% as explained within the "history" environment above.
+
+% You do not need to create the "References" section yourself. 
+% This is done automatically.
+
+
+
+
+% Leave an empty line above "\end{entry}".
+
+\end{entry}
